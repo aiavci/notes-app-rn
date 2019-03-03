@@ -1,13 +1,28 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
+import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
+import { Provider } from 'react-redux';
+import AppNavigator from './navigation';
 
-import { HomeScreen } from "./screens";
+import { createStore, applyMiddleware } from 'redux';
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-  }
-}, {
-    initialRouteName: 'Home',
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
+
+import reducer from './reducer';
+
+const client = axios.create({
+  baseURL: 'https://api.github.com',
+  responseType: 'json'
 });
 
-export default createAppContainer(AppNavigator);
+const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
+    );
+  }
+}

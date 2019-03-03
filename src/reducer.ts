@@ -1,6 +1,6 @@
-export const GET_REPOS = 'my-awesome-app/repos/LOAD';
-export const GET_REPOS_SUCCESS = 'my-awesome-app/repos/LOAD_SUCCESS';
-export const GET_REPOS_FAIL = 'my-awesome-app/repos/LOAD_FAIL';
+export const GET_REPOS = 'reactnativetemplate/repos/LOAD';
+export const GET_REPOS_SUCCESS = 'reactnativetemplate/repos/LOAD_SUCCESS';
+export const GET_REPOS_FAIL = 'reactnativetemplate/repos/LOAD_FAIL';
 
 export default function reducer(state = { repos: [] }, action: any) {
   switch (action.type) {
