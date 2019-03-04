@@ -22,9 +22,9 @@ export function updateNote(id: any, title: string, content: string) {
     }
 }
 
-export function removeNote(title: string) {
+export function removeNote(id: string) {
     return {
         type: REMOVE_NOTE,
-        title: title
+        id: id
     }
 }

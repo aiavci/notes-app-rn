@@ -29,7 +29,6 @@ export default function reducer(state = { notes: INITIAL_STATE }, action: any) {
         ...state
       };
     case REMOVE_NOTE:
-      console.log(' action.id', action.id)
       return {
         ...state,
         notes: state.notes.filter(note => note.id !== action.id)

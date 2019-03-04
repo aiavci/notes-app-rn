@@ -8,12 +8,12 @@ import { removeNote } from '../actions';
 
 import { NoteItem } from '.'
 
-class AddNoteButton extends React.Component<any> {
+class SwipeButton extends React.Component<any> {
   swipeButtons = [
     {
       text: 'Delete',
       backgroundColor: 'red',
-      onPress: () => { this.props.removeNote(this.props.title)}
+      onPress: () => { this.props.removeNote(this.props.id)}
     }
   ];
   render() {
@@ -37,4 +37,4 @@ const mapDispatchToProps = {
   removeNote
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNoteButton);
+export default connect(mapStateToProps, mapDispatchToProps)(SwipeButton);

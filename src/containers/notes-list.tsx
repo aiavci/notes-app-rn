@@ -6,7 +6,7 @@ import { SwipeButton } from "../components";
 
 class NotesList extends Component<any> {
   renderItem = (listItem: any) => (
-    <SwipeButton title = { listItem.item.title } onPress = {() => this.props.navigation.navigate('NewNote', { title: listItem.item.title })}/>
+    <SwipeButton id = { listItem.item.id } title = { listItem.item.title } onPress = {() => this.props.navigation.navigate('NewNote', { title: listItem.item.title })}/>
   );
 
   render() {
@@ -21,7 +21,7 @@ class NotesList extends Component<any> {
 }
 
 const mapStateToProps = (state: any) => {
-  let storedNotes = state.notes.map((note: any) => ({ key: "" + note.title, ...note }));
+  let storedNotes = state.notes.map((note: any) => ({ key: "" + note.id, ...note }));
 
   return {
     notes: storedNotes
