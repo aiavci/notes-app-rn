@@ -1,1 +1,1 @@
-export { default as RepoList } from "./repo-list";
+export { default as NotesList } from "./notes-list";
