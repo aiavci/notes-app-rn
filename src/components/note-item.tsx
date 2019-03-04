@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { TouchableHighlight, Text, StyleSheet } from 'react-native';
 
 class NoteItem extends Component<any> {
   render() {
     return (
-      <View style={styles.item}>
+      <TouchableHighlight style = { styles.item } onPress = { this.props.onPress }>
         <Text>{this.props.title}</Text>
-      </View>
+      </TouchableHighlight>
     );
   }
 }

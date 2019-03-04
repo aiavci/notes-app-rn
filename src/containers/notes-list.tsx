@@ -6,7 +6,7 @@ import { SwipeButton } from "../components";
 
 class NotesList extends Component<any> {
   renderItem = (listItem: any) => (
-    <SwipeButton title={listItem.item.title}/>
+    <SwipeButton title = { listItem.item.title } onPress = {() => this.props.navigation.navigate('NewNote', { title: listItem.item.title })}/>
   );
 
   render() {
@@ -14,7 +14,7 @@ class NotesList extends Component<any> {
     return (
       <FlatList
         data={notes}
-        renderItem={this.renderItem}
+        renderItem = { this.renderItem }
       />
     );
   }

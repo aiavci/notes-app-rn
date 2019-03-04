@@ -13,7 +13,7 @@ export default class HomeScreen extends React.Component<any> {
     render() {
       return (
         <View style = { styles.homeScreen }>
-          <NotesList/>
+          <NotesList navigation={this.props.navigation} />
           <AddNoteButton navigation = { this.props.navigation }/>
         </View>
       );

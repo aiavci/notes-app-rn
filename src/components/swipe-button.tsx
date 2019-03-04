@@ -23,7 +23,7 @@ class AddNoteButton extends React.Component<any> {
         autoClose
         backgroundColor = 'transparent'
       >
-        <NoteItem title = {this.props.title} />
+        <NoteItem title = { this.props.title } onPress = { this.props.onPress }/>
       </Swipeout>
     )
   }
