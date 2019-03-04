@@ -1,4 +1,4 @@
-package com.reactnativetemplate;
+package com.notesapprn;
 
 import android.app.Application;
 
