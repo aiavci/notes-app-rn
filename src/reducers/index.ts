@@ -3,7 +3,7 @@ import { ADD_NOTE } from "../actions";
 export const GET_NOTES = 'GET_NOTES';
 
 const INITIAL_STATE = [
-  { title: "sample note titlez", content: "Sample note content" }
+  { title: "sample note title", content: "Sample note content" }
 ]
 
 export default function reducer(state = { notes: INITIAL_STATE }, action: any) {
