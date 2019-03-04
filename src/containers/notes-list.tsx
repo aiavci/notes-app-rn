@@ -21,7 +21,7 @@ class NotesList extends Component<any> {
 }
 
 const mapStateToProps = (state: any) => {
-  let storedNotes = state.notes.map((note: any) => ({ key: "" + note.id, ...note }));
+  let storedNotes = state.notes.map((note: any) => ({ key: "note-" + note.id, ...note }));
 
   return {
     notes: storedNotes
