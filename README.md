@@ -1,4 +1,4 @@
-# react-native-template
+# notes-app-rn 
 Sample notes app with React Native
 
 # Usage guide
