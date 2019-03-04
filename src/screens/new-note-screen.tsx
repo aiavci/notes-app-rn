@@ -3,7 +3,7 @@ import { View, Button, TextInput } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { addNote } from '../actions';
+import { addNote, updateNote } from '../actions';
 
 class NewNoteScreen extends React.Component<any> {
   state = {
@@ -13,6 +13,15 @@ class NewNoteScreen extends React.Component<any> {
   static navigationOptions = {
     title: 'New Note',
   };
+
+  handleSave() {
+    if(this.props.title) {
+      this.props.updateNote(this.props.id, this.state.title, this.state.content)
+    } else {
+      this.props.addNote(this.state.title, this.state.content)
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1, flexGrow: 1, flexDirection: 'column'}}>
@@ -34,7 +43,7 @@ class NewNoteScreen extends React.Component<any> {
             title = "Save Note"
             onPress = {
               () => {
-                this.props.addNote(this.state.title, this.state.content)
+                this.handleSave();
                 this.props.navigation.navigate('Home')
               }
             }
@@ -55,13 +64,15 @@ const mapStateToProps = (state: any, props: any) => {
   }
 
   return {
+    id: note.id,
     title: note.title,
     content: note.content
   }
 };
 
 const mapDispatchToProps = {
-  addNote
+  addNote,
+  updateNote
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewNoteScreen);

@@ -9,7 +9,7 @@ import { removeNote } from '../actions';
 import { NoteItem } from '.'
 
 class AddNoteButton extends React.Component<any> {
-  swipeBtns = [
+  swipeButtons = [
     {
       text: 'Delete',
       backgroundColor: 'red',
@@ -19,7 +19,7 @@ class AddNoteButton extends React.Component<any> {
   render() {
     return (
       <Swipeout
-        right={this.swipeBtns}
+        right = { this.swipeButtons }
         autoClose
         backgroundColor = 'transparent'
       >
