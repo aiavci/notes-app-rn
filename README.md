@@ -39,9 +39,9 @@ Redux: State management library
 React Navigation: Navigation between screens
 
 # Screenshots
-![View All Notes](https://raw.githubusercontent.com/aiavci/notes-app-rn/master/docs/screenshots/All Notes.png)
+![View All Notes](https://raw.githubusercontent.com/aiavci/notes-app-rn/master/docs/screenshots/AllNotes.png)
 ![Edit](https://raw.githubusercontent.com/aiavci/notes-app-rn/master/docs/screenshots/Edit.png)
-![View Note](https://raw.githubusercontent.com/aiavci/notes-app-rn/master/docs/screenshots/View Note.png)
+![View Note](https://raw.githubusercontent.com/aiavci/notes-app-rn/master/docs/screenshots/ViewNote.png)
 
 ## Support
 
