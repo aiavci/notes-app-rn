@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { NoteItem } from "../components";
+import { SwipeButton } from "../components";
 
 class NotesList extends Component<any> {
   renderItem = (listItem: any) => (
-    <NoteItem title={listItem.item.title}/>
+    <SwipeButton title={listItem.item.title}/>
   );
 
   render() {
