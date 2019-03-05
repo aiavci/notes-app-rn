@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import { getNotes, saveNote } from "../storage"
+import { getNotes, saveNote, deleteNote } from "../storage"
 
 export const ADD_NOTE = 'ADD_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
@@ -88,13 +88,21 @@ export function updateNote(id: any, title: string, content: string) {
   }
 }
 
+function performRemoveNote(id: string) {
+  return {
+    type: REMOVE_NOTE,
+    id: id
+  }
+}
+
 /**
  * Remove note
  * @param id Note ID
  */
 export function removeNote(id: string) {
-  return {
-    type: REMOVE_NOTE,
-    id: id
+  return function (dispatch: any) {
+    return deleteNote(id, () => {
+      dispatch(performRemoveNote(id))
+    })
   }
 }

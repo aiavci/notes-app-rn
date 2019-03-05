@@ -12,7 +12,7 @@ export const saveNote = async (note: any, callback: CallableFunction) => {
     }
   };
 
-export const getNotes = async (callback: any) => {
+export const getNotes = async (callback: CallableFunction) => {
     try {
       let allNotes: Array<any> = [];
 
@@ -31,9 +31,11 @@ export const getNotes = async (callback: any) => {
     }
   };
 
-export const removeNote = async (note: any) => {
+export const deleteNote = async (id: string, callback: CallableFunction) => {
     try {
-      await AsyncStorage.removeItem('note-' + note.id);
+      await AsyncStorage.removeItem('note-' + id);
+
+      callback()
     } catch (error) {
       // Error retrieving data
       console.log(error.message);
