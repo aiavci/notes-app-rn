@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
 import { AsyncStorage } from 'react-native'
 
 export const saveNote = async (note: any) => {

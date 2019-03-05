@@ -1,5 +1,8 @@
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -9,15 +12,16 @@ import { AddNoteButton } from "../components"
 
 import { NotesList } from "../containers"
 
-import {getNotes} from '../storage'
+import { getNotes } from '../storage'
 
 class HomeScreen extends React.Component<any> {
-  
+  state = {
+    isLoading: this.props.isLoading
+  }
+
   componentDidMount() {
     getNotes((allNotes: any[]) => {
-      console.log('allNotes', allNotes.length)
       allNotes.forEach((note) => {
-        console.log('note', note)
         this.props.addNote(note.title, note.content)
       })
     })
@@ -28,10 +32,26 @@ class HomeScreen extends React.Component<any> {
   };
 
   render() {
+    let displayedContent = null;
+    if (this.state.isLoading) {
+      displayedContent = (
+        <View style={{padding: 10, alignItems: "center"}}>
+          <ActivityIndicator/>
+          <Text style = {{padding: 10}}>Loading Notes...</Text>
+        </View>
+      )
+    } else {
+      displayedContent = (
+        <View>
+          <NotesList navigation={this.props.navigation} />
+          <AddNoteButton navigation = { this.props.navigation }/>
+        </View>
+      )
+    }
+
     return (
       <View style = { styles.homeScreen }>
-        <NotesList navigation={this.props.navigation} />
-        <AddNoteButton navigation = { this.props.navigation }/>
+        {displayedContent}
       </View>
     );
   }  
@@ -45,7 +65,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any, props: any) => {
-  return {}
+  return {
+    isLoading: state.isLoading
+  }
 };
 
 const mapDispatchToProps = {

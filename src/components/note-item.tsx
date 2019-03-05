@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
 import React, { Component } from 'react';
 import { TouchableHighlight, Text, StyleSheet } from 'react-native';
 

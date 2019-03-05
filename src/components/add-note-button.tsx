@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
+import React from 'react';
 
 import { View, Button } from 'react-native';
 

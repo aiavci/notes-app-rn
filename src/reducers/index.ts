@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
 import { GET_NOTES, ADD_NOTE, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
 
 import {saveNote} from '../storage'
@@ -8,7 +11,7 @@ const INITIAL_STATE = [
   { id: nextNoteId, title: "sample note title", content: "Sample note content" }
 ]
 
-export default function reducer(state = { notes: INITIAL_STATE }, action: any) {
+export default function reducer(state = { isLoading: true, notes: INITIAL_STATE }, action: any) {
   switch (action.type) {
     case ADD_NOTE:
       const newId = ++nextNoteId

@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019 Ali I. Avci
+ */
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import { HomeScreen, NewNoteScreen } from "./screens";
