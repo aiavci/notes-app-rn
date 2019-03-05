@@ -5,11 +5,22 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import AppNavigator from './navigation';
 
-import { createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+
+import { createStore, applyMiddleware } from 'redux';
 
 import reducer from './reducers';
 
-const store = createStore(reducer);
+const loggerMiddleware = createLogger()
+
+const store = createStore(
+  reducer,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+    loggerMiddleware // neat middleware that logs actions
+  )
+)
 
 export default class App extends Component {
   render() {

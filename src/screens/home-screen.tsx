@@ -6,34 +6,29 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { addNote } from '../actions';
-
 import { AddNoteButton } from "../components"
 
 import { NotesList } from "../containers"
 
-import { getNotes } from '../storage'
+import { fetchNotes } from "../actions"
 
 class HomeScreen extends React.Component<any> {
   state = {
     isLoading: this.props.isLoading
   }
 
-  componentDidMount() {
-    getNotes((allNotes: any[]) => {
-      allNotes.forEach((note) => {
-        this.props.addNote(note.title, note.content)
-      })
-    })
-  }
-
   static navigationOptions = {
     title: 'Notes',
   };
 
+  componentDidMount() {
+    this.props.fetchNotes()
+  }
+
   render() {
     let displayedContent = null;
-    if (this.state.isLoading) {
+
+    if (this.props.isLoading) {
       displayedContent = (
         <View style={{padding: 10, alignItems: "center"}}>
           <ActivityIndicator/>
@@ -70,8 +65,10 @@ const mapStateToProps = (state: any, props: any) => {
   }
 };
 
-const mapDispatchToProps = {
-  addNote
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    fetchNotes: () => dispatch(fetchNotes())
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

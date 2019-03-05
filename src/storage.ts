@@ -18,7 +18,7 @@ export const getNotes = async (callback: any) => {
 
       const allKeys = await AsyncStorage.getAllKeys();
 
-      asyncForEach(allKeys, async (key: string) => {
+      await asyncForEach(allKeys, async (key: string) => {
         await AsyncStorage.getItem(key).then((note: any) => {
            allNotes.push(note);
         })

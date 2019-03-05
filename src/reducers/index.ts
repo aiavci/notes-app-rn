@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import { GET_NOTES, ADD_NOTE, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
+import { GET_NOTES, ADD_NOTE, FETCH_NOTES, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
 
 import {saveNote} from '../storage'
 
@@ -13,6 +13,12 @@ const INITIAL_STATE = [
 
 export default function reducer(state = { isLoading: true, notes: INITIAL_STATE }, action: any) {
   switch (action.type) {
+    case FETCH_NOTES:
+      state.isLoading = action.isLoading;
+      if (action.allNotes) {
+        state.notes = action.allNotes;
+      }
+
     case ADD_NOTE:
       const newId = ++nextNoteId
       saveNote({id: newId, title: action.title, content: action.content})
@@ -24,6 +30,7 @@ export default function reducer(state = { isLoading: true, notes: INITIAL_STATE 
           content: action.content
         })
       };
+
     case UPDATE_NOTE:
       const note = state.notes.find(note => note.id == action.id)
       
@@ -35,13 +42,16 @@ export default function reducer(state = { isLoading: true, notes: INITIAL_STATE 
       return {
         ...state
       };
+
     case REMOVE_NOTE:
       return {
         ...state,
         notes: state.notes.filter(note => note.id !== action.id)
       }
+
     case GET_NOTES:
       return { ...state};
+
     default:
       return state;
   }
