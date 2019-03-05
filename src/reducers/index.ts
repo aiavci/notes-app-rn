@@ -3,12 +3,8 @@
  */
 import { GET_NOTES, ADD_NOTE, FETCH_NOTES, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
 
-import {saveNote} from '../storage'
-
-let nextNoteId = 0;
-
 const INITIAL_STATE = [
-  { id: nextNoteId, title: "sample note title", content: "Sample note content" }
+  { id: 0, title: "sample note title", content: "Sample note content" }
 ]
 
 export default function reducer(state = { isLoading: true, notes: INITIAL_STATE }, action: any) {
@@ -20,12 +16,10 @@ export default function reducer(state = { isLoading: true, notes: INITIAL_STATE 
       }
 
     case ADD_NOTE:
-      const newId = ++nextNoteId
-      saveNote({id: newId, title: action.title, content: action.content})
       return {
         ...state,
         notes: state.notes.concat({
-          id: newId,
+          id: action.id,
           title: action.title,
           content: action.content
         })

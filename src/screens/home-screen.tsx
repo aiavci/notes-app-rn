@@ -14,7 +14,7 @@ import { fetchNotes } from "../actions"
 
 class HomeScreen extends React.Component<any> {
   state = {
-    isLoading: this.props.isLoading
+    isLoading: this.props.isLoading,
   }
 
   static navigationOptions = {
@@ -27,7 +27,6 @@ class HomeScreen extends React.Component<any> {
 
   render() {
     let displayedContent = null;
-
     if (this.props.isLoading) {
       displayedContent = (
         <View style={{padding: 10, alignItems: "center"}}>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state: any, props: any) => {
+const mapStateToProps = (state: any) => {
   return {
     isLoading: state.isLoading
   }

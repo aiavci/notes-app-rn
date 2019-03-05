@@ -3,7 +3,7 @@
  */
 import { AsyncStorage } from 'react-native'
 
-export const saveNote = async (note: any) => {
+export const saveNote = async (note: any, callback: CallableFunction) => {
     try {
       await AsyncStorage.setItem('note-' + note.id, JSON.stringify(note));
     } catch (error) {

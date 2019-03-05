@@ -16,14 +16,14 @@ class NotesList extends Component<any> {
     const { notes } = this.props;
     return (
       <FlatList
-        data={notes}
+        data = { notes }
         renderItem = { this.renderItem }
       />
     );
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, props: any) => {
   let storedNotes = state.notes.map((note: any) => ({ key: "note-" + note.id, ...note }));
 
   return {

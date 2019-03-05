@@ -1,13 +1,19 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import { getNotes } from "../storage"
+import { getNotes, saveNote } from "../storage"
 
 export const ADD_NOTE = 'ADD_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const GET_NOTES = 'GET_NOTES';
 export const FETCH_NOTES = 'FETCH_NOTES';
+
+let nextNoteId = 0;
+
+function generateNoteId() {
+  return ++nextNoteId;
+}
 
 export function startLoading() {
   return {
@@ -16,12 +22,11 @@ export function startLoading() {
   }
 }
 
-export function setNotes(allNotes: Array<any>) {
-  console.log('check allNotes', JSON.stringify(allNotes, null, 2))
+export function performFetch(allNotes: Array<any>) {
   return {
     type: FETCH_NOTES,
     isLoading: false,
-    allNotes: allNotes
+    allNotes: allNotes.map((note) => { return JSON.parse(note) })
   }
 }
 
@@ -29,8 +34,26 @@ export function fetchNotes() {
   return function (dispatch: any) {
     dispatch(startLoading())
     return getNotes((allNotes: Array<any>) => {
-      dispatch(setNotes(allNotes))
+      dispatch(performFetch(allNotes))
     })
+  }
+}
+
+export function performUpdateNote(id: any, title: string, content: string) {
+  return {
+    type: UPDATE_NOTE,
+    id: id,
+    title: title,
+    content: content
+  }
+}
+
+export function performSaveNote(id: any, title: string, content: string) {
+  return {
+    type: ADD_NOTE,
+    id: id,
+    title: title,
+    content: content
   }
 }
 
@@ -40,10 +63,13 @@ export function fetchNotes() {
  * @param content Note content
  */
 export function addNote(title: string, content: string) {
-  return {
-    type: ADD_NOTE,
-    title: title,
-    content: content
+  return function (dispatch: any) {
+    const noteId = generateNoteId();
+    const note = {id: noteId, title: title, content: content};
+
+    return saveNote(note, () => {
+      dispatch(performSaveNote(noteId, title, content))
+    })
   }
 }
 
