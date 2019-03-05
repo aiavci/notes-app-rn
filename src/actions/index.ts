@@ -9,10 +9,13 @@ export const REMOVE_NOTE = 'REMOVE_NOTE';
 export const GET_NOTES = 'GET_NOTES';
 export const FETCH_NOTES = 'FETCH_NOTES';
 
-let nextNoteId = 0;
+let lastGeneratedNoteId = 0;
 
+/**
+ * Generate new note ID
+ */
 function generateNoteId() {
-  return ++nextNoteId;
+  return ++lastGeneratedNoteId;
 }
 
 export function startLoading() {
@@ -31,29 +34,11 @@ export function performFetch(allNotes: Array<any>) {
 }
 
 export function fetchNotes() {
-  return function (dispatch: any) {
+  return (dispatch: any) => {
     dispatch(startLoading())
     return getNotes((allNotes: Array<any>) => {
       dispatch(performFetch(allNotes))
     })
-  }
-}
-
-export function performUpdateNote(id: any, title: string, content: string) {
-  return {
-    type: UPDATE_NOTE,
-    id: id,
-    title: title,
-    content: content
-  }
-}
-
-export function performSaveNote(id: any, title: string, content: string) {
-  return {
-    type: ADD_NOTE,
-    id: id,
-    title: title,
-    content: content
   }
 }
 
@@ -63,12 +48,19 @@ export function performSaveNote(id: any, title: string, content: string) {
  * @param content Note content
  */
 export function addNote(title: string, content: string) {
-  return function (dispatch: any) {
+  return (dispatch: any) => {
     const noteId = generateNoteId();
     const note = {id: noteId, title: title, content: content};
 
     return saveNote(note, () => {
-      dispatch(performSaveNote(noteId, title, content))
+      dispatch((noteId: string, title: string, content: string) => {
+        return {
+          type: ADD_NOTE,
+          id: noteId,
+          title: title,
+          content: content
+        }
+      })
     })
   }
 }
@@ -79,19 +71,20 @@ export function addNote(title: string, content: string) {
  * @param title Note title
  * @param content Note content
  */
-export function updateNote(id: any, title: string, content: string) {
-  return {
-    type: UPDATE_NOTE,
-    id: id,
-    title: title,
-    content: content
-  }
-}
+export function updateNote(id: string, title: string, content: string) {
+  return (dispatch: any) => {
+    const note = {id: id, title: title, content: content};
 
-function performRemoveNote(id: string) {
-  return {
-    type: REMOVE_NOTE,
-    id: id
+    return saveNote(note, () => {
+      dispatch((id: string, title: string, content: string) => {
+        return {
+          type: UPDATE_NOTE,
+          id: id,
+          title: title,
+          content: content
+        }
+      })
+    })
   }
 }
 
@@ -100,9 +93,14 @@ function performRemoveNote(id: string) {
  * @param id Note ID
  */
 export function removeNote(id: string) {
-  return function (dispatch: any) {
+  return (dispatch: any) => {
     return deleteNote(id, () => {
-      dispatch(performRemoveNote(id))
+      dispatch((id: string) => {
+        return {
+          type: REMOVE_NOTE,
+          id: id
+        }
+      })
     })
   }
 }

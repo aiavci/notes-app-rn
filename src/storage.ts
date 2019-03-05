@@ -6,6 +6,8 @@ import { AsyncStorage } from 'react-native'
 export const saveNote = async (note: any, callback: CallableFunction) => {
     try {
       await AsyncStorage.setItem('note-' + note.id, JSON.stringify(note));
+
+      callback()
     } catch (error) {
       // Error retrieving data
       console.log(error.message);
@@ -43,8 +45,13 @@ export const deleteNote = async (id: string, callback: CallableFunction) => {
   };
 
 
-async function asyncForEach(array: Array<any>, callback: CallableFunction) {
+  /**
+   * Helper method to loop through array in sync
+   * @param array 
+   * @param eachMethod Method called at each loop 
+   */
+async function asyncForEach(array: Array<any>, eachMethod: CallableFunction) {
   for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
+    await eachMethod(array[index], index, array);
   }
 }

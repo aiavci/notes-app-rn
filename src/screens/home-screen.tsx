@@ -2,6 +2,7 @@
  * Copyright (c) 2019 Ali I. Avci
  */
 import React from 'react';
+
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 import { connect } from 'react-redux';

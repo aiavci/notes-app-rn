@@ -9,11 +9,21 @@ import { SwipeButton } from "../components";
 
 class NotesList extends Component<any> {
   renderItem = (listItem: any) => (
-    <SwipeButton id = { listItem.item.id } title = { listItem.item.title } onPress = {() => this.props.navigation.navigate('NewNote', { title: listItem.item.title })}/>
+    <SwipeButton
+      id = { listItem.item.id }
+      title = { listItem.item.title }
+      onPress = { () => {
+        return this.props.navigation.navigate(
+          'NewNote',
+          { title: listItem.item.title }
+        )
+      }}
+    />
   );
 
   render() {
     const { notes } = this.props;
+
     return (
       <FlatList
         data = { notes }
