@@ -3,17 +3,18 @@
  */
 import { GET_NOTES, ADD_NOTE, FETCH_NOTES, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
 
-const INITIAL_STATE = [
-  { id: 0, title: "sample note title", content: "Sample note content" }
-]
+const INITIAL_STATE = { 
+  isLoading: true, notes: Array()
+}
 
-export default function reducer(state = { isLoading: true, notes: INITIAL_STATE }, action: any) {
+export default function reducer(state = INITIAL_STATE, action: any) {
   switch (action.type) {
     case FETCH_NOTES:
-      state.isLoading = action.isLoading;
-      if (action.allNotes) {
-        state.notes = action.allNotes;
-      }
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        notes: action.allNotes || []
+      };
 
     case ADD_NOTE:
       return {

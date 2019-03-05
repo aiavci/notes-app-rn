@@ -37,7 +37,7 @@ class HomeScreen extends React.Component<any> {
       )
     } else {
       displayedContent = (
-        <View>
+        <View style = { styles.homeScreen }>
           <NotesList navigation={this.props.navigation} />
           <AddNoteButton navigation = { this.props.navigation }/>
         </View>
