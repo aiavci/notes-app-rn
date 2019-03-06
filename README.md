@@ -1,11 +1,15 @@
 # notes-app-rn
-Basic notes app with React Native
+Basic notes app with React Native.
+Created using with guide https://www.npmjs.com/package/react-native-template-typescript
 
 ## Status
-Remaining: Data needs to be persisted.
+Basic note application in working state.
+
+Possible enhancements: Switch to Room or SQLite database for larger storage
 
 # Usage guide
-https://www.npmjs.com/package/react-native-template-typescript
+- Remove note by swiping note item to the left and clicking 'Delete'
+- Add note by clicking 'Add Note' button in home page, adding note details then clicking 'Save Note'
 
 ## Local Installation
 React Native and npm need to both be installed to run this project locally
