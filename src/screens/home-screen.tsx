@@ -14,10 +14,6 @@ import { NotesList } from "../containers"
 import { fetchNotes } from "../actions"
 
 class HomeScreen extends React.Component<any> {
-  state = {
-    isLoading: this.props.isLoading,
-  }
-
   static navigationOptions = {
     title: 'Notes',
   };
