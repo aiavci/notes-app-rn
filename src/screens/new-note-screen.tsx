@@ -8,20 +8,38 @@ import { connect } from 'react-redux';
 
 import { addNote, updateNote } from '../actions';
 
-class NewNoteScreen extends React.Component<any> {
+
+type Props = {
+  id?: number,
+  title?: string,
+  content?: string,
+  updateNote: CallableFunction,
+  addNote: CallableFunction,
+  navigation: any
+};
+
+type State = {
+  title: string,
+  content: string
+};
+class NewNoteScreen extends React.Component<Props, State> {
   state = {
     title: this.props.title || '',
     content: this.props.content || '',
   }
+
   static navigationOptions = {
     title: 'New Note',
   };
 
   handleSave() {
-    if(this.props.title) {
-      this.props.updateNote(this.props.id, this.state.title, this.state.content)
+    const title = this.state.title || "New Note - " + new Date().toDateString();
+
+    if(this.props.title || this.props.content) {
+      // If title or content are passed in to this component, update it
+      this.props.updateNote(this.props.id, title, this.state.content)
     } else {
-      this.props.addNote(this.state.title, this.state.content)
+      this.props.addNote(title, this.state.content)
     }
   }
 

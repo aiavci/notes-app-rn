@@ -59,12 +59,11 @@ export function addNoteAction(note: any) {
  */
 export function addNote(title: string, content: string) {
   return (dispatch: any) => {
-    const noteId = generateNoteId();
-    const note = {id: noteId, title: title, content: content};
-    
+    const newNoteId = generateNoteId();
+    const note = {id: newNoteId, title: title, content: content};
     return saveNote(note, () => {
-      saveLastId(lastGeneratedNoteId)
-      dispatch(addNoteAction(note))
+      saveLastId(newNoteId);
+      dispatch(addNoteAction(note));
     })
   }
 }

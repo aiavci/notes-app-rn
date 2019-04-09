@@ -3,7 +3,7 @@
  */
 import { GET_NOTES, ADD_NOTE, FETCH_NOTES, UPDATE_NOTE, REMOVE_NOTE } from "../actions";
 
-const INITIAL_STATE = { 
+const INITIAL_STATE = {
   isLoading: true, notes: Array()
 }
 
@@ -29,7 +29,7 @@ export default function reducer(state = INITIAL_STATE, action: any) {
 
     case UPDATE_NOTE:
       const note = state.notes.find(note => note.id == action.id)
-      
+
       if (note) {
         note.title = action.title;
         note.content = action.content;
@@ -46,7 +46,7 @@ export default function reducer(state = INITIAL_STATE, action: any) {
       }
 
     case GET_NOTES:
-      return { ...state};
+      return { ...state };
 
     default:
       return state;

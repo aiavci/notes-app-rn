@@ -7,7 +7,14 @@ import { connect } from 'react-redux';
 
 import { SwipeButton } from "../components";
 
-class NotesList extends Component<any> {
+type Props = {
+  notes: Array<any>,
+  navigation: any
+};
+
+type State = {};
+
+class NotesList extends Component<Props, State> {
   renderItem = (listItem: any) => (
     <SwipeButton
       id = { listItem.item.id }

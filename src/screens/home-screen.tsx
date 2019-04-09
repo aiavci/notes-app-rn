@@ -13,7 +13,15 @@ import { NotesList } from "../containers"
 
 import { fetchNotes } from "../actions"
 
-class HomeScreen extends React.Component<any> {
+type Props = {
+  fetchNotes: any,
+  isLoading: boolean,
+  navigation: any
+}
+
+type State = {}
+
+class HomeScreen extends React.Component<Props, State> {
   static navigationOptions = {
     title: 'Notes',
   };

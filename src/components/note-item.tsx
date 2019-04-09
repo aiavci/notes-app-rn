@@ -4,7 +4,14 @@
 import React, { Component } from 'react';
 import { TouchableHighlight, Text, StyleSheet } from 'react-native';
 
-class NoteItem extends Component<any> {
+type Props = {
+  onPress: any,
+  title: string
+};
+
+type State = {};
+
+class NoteItem extends Component<Props, State> {
   render() {
     return (
       <TouchableHighlight style = { styles.item } onPress = { this.props.onPress }>

@@ -9,20 +9,30 @@ import { connect } from 'react-redux';
 
 import { removeNote } from '../actions';
 
-import { NoteItem } from '.'
+import { NoteItem } from './';
 
-class SwipeButton extends React.Component<any> {
-  swipeButtons = [
+type Props = {
+  id: number,
+  title: string,
+  onPress: any,
+  removeNote: CallableFunction,
+};
+
+type State = {};
+
+class SwipeButton extends React.Component<Props, State> {
+  swipeButtonConfigurations = [
     {
       text: 'Delete',
       backgroundColor: 'red',
       onPress: () => { this.props.removeNote(this.props.id)}
     }
   ];
+
   render() {
     return (
       <Swipeout
-        right = { this.swipeButtons }
+        right = { this.swipeButtonConfigurations }
         autoClose
         backgroundColor = 'transparent'
       >
