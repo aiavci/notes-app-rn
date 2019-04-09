@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import { getNotes, saveNote, deleteNote } from "../storage"
+import { getNotes, saveNote, deleteNote, saveLastId } from "../storage"
 
 export const ADD_NOTE = 'ADD_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
@@ -25,10 +25,11 @@ export function startLoading() {
   }
 }
 
-export function performFetch(allNotes: Array<any>) {
+export function performFetch(lastId: string, allNotes: Array<any>) {
   return {
     type: FETCH_NOTES,
     isLoading: false,
+    lastId: lastId,
     allNotes: allNotes.map((note) => { return JSON.parse(note) })
   }
 }
@@ -36,8 +37,8 @@ export function performFetch(allNotes: Array<any>) {
 export function fetchNotes() {
   return (dispatch: any) => {
     dispatch(startLoading())
-    return getNotes((allNotes: Array<any>) => {
-      dispatch(performFetch(allNotes))
+    return getNotes((lastId: string, allNotes: Array<any>) => {
+      dispatch(performFetch(lastId, allNotes))
     })
   }
 }
@@ -60,7 +61,9 @@ export function addNote(title: string, content: string) {
   return (dispatch: any) => {
     const noteId = generateNoteId();
     const note = {id: noteId, title: title, content: content};
+    
     return saveNote(note, () => {
+      saveLastId(lastGeneratedNoteId)
       dispatch(addNoteAction(note))
     })
   }

@@ -13,6 +13,7 @@ export default function reducer(state = INITIAL_STATE, action: any) {
       return {
         ...state,
         isLoading: action.isLoading,
+        id: action.lastId,
         notes: action.allNotes || []
       };
 
