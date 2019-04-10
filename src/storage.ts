@@ -8,9 +8,11 @@ const LAST_NOTE_ID = 'last-note-id';
  * Save last generated ID to storage
  * @param lastId ID of last generated note
  */
-export const saveLastId = async (lastId: number) => {
+export const saveLastId = async (lastId: number, callback: CallableFunction) => {
   try {
     await AsyncStorage.setItem(LAST_NOTE_ID, lastId.toString());
+
+    callback();
   } catch (error) {
     // Error retrieving data
     console.log(error.message);
@@ -20,8 +22,8 @@ export const saveLastId = async (lastId: number) => {
 export const saveNote = async (note: any, callback: CallableFunction) => {
     try {
       await AsyncStorage.setItem('note-' + note.id, JSON.stringify(note));
-
-      callback()
+      
+      callback();
     } catch (error) {
       // Error retrieving data
       console.log(error.message);
@@ -32,12 +34,13 @@ export const getNotes = async (callback: CallableFunction) => {
     try {
       let allNotes: Array<any> = [];
 
-      let allKeys = await AsyncStorage.getAllKeys();
-      allKeys = allKeys.filter((key) => { key !== LAST_NOTE_ID })
+      let allNoteKeys = await AsyncStorage.getAllKeys();
+
+      allNoteKeys = allNoteKeys.filter((key) => { return key !== LAST_NOTE_ID });
 
       const lastId = await AsyncStorage.getItem(LAST_NOTE_ID);
 
-      await asyncForEach(allKeys, async (key: string) => {
+      await asyncForEach(allNoteKeys, async (key: string) => {
         await AsyncStorage.getItem(key).then((note: any) => {
            allNotes.push(note);
         })

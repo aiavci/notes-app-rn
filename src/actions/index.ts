@@ -25,7 +25,7 @@ export function startLoading() {
   }
 }
 
-export function performFetch(lastId: string, allNotes: Array<any>) {
+function performFetch(lastId: number, allNotes: Array<any>) {
   return {
     type: FETCH_NOTES,
     isLoading: false,
@@ -37,7 +37,8 @@ export function performFetch(lastId: string, allNotes: Array<any>) {
 export function fetchNotes() {
   return (dispatch: any) => {
     dispatch(startLoading())
-    return getNotes((lastId: string, allNotes: Array<any>) => {
+    return getNotes((lastId: number, allNotes: Array<any>) => {
+      lastGeneratedNoteId = lastId;
       dispatch(performFetch(lastId, allNotes))
     })
   }
@@ -62,8 +63,9 @@ export function addNote(title: string, content: string) {
     const newNoteId = generateNoteId();
     const note = {id: newNoteId, title: title, content: content};
     return saveNote(note, () => {
-      saveLastId(newNoteId);
-      dispatch(addNoteAction(note));
+      saveLastId(newNoteId, () => {
+        dispatch(addNoteAction(note));
+      });
     })
   }
 }
