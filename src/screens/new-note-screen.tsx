@@ -47,7 +47,7 @@ class NewNoteScreen extends React.Component<Props, State> {
     return (
       <View style={{ flex: 1, flexGrow: 1, flexDirection: 'column'}}>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, fontSize: 24}}
           placeholder="Title"
           onChangeText={(title) => this.setState({title})}
           value={this.state.title}
