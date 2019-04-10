@@ -47,13 +47,13 @@ class NewNoteScreen extends React.Component<Props, State> {
     return (
       <View style={{ flex: 1, flexGrow: 1, flexDirection: 'column'}}>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1, fontSize: 24}}
+          style={{height: 60, borderColor: 'gray', borderWidth: 1, fontSize: 24}}
           placeholder="Title"
           onChangeText={(title) => this.setState({title})}
           value={this.state.title}
         />
         <TextInput
-            style = {{flexGrow: 1}}
+            style = {{flexGrow: 1, textAlignVertical: 'top'}}
             placeholder = "Note"
             onChangeText = {(content) => this.setState({content})}
             multiline

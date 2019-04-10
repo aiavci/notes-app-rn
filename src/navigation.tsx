@@ -5,6 +5,8 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import { HomeScreen, NewNoteScreen } from "./screens";
 
+import { Dimensions } from "react-native";
+
 const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen,
@@ -21,6 +23,7 @@ const AppNavigator = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
+        width : Dimensions.get('window').width,
         fontWeight: 'bold',
       },
     },
