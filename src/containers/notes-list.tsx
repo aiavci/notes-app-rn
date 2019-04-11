@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { SwipeButton } from "../components";
+import { SwipeButton } from "../containers";
 
 type Props = {
   notes: Array<any>,

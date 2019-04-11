@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { removeNote } from '../actions';
 
-import { NoteItem } from './';
+import { NoteItem } from '../components';
 
 type Props = {
   id: number,
@@ -43,7 +43,7 @@ class SwipeButton extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => {
-  return {}
+  return {};
 };
 
 const mapDispatchToProps = {
