@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const LAST_NOTE_ID = 'last-note-id';
 /**
