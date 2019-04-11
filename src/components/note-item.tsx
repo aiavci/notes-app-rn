@@ -1,32 +1,26 @@
 /*
  * Copyright (c) 2019 Ali I. Avci
  */
-import React, { Component } from 'react';
-import { TouchableHighlight, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
+
+import styled from 'styled-components/native';
+
+const NoteItemWrapper = styled.TouchableHighlight`
+  padding: 16px;
+  border-bottom-width: 1;
+  border-bottom-color: #ccc;
+`;
 
 type Props = {
   onPress: any,
   title: string
 };
 
-type State = {};
-
-class NoteItem extends Component<Props, State> {
-  render() {
-    return (
-      <TouchableHighlight style = { styles.item } onPress = { this.props.onPress }>
-        <Text>{this.props.title}</Text>
-      </TouchableHighlight>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc'
-  }
-});
+const NoteItem = ({title = '', onPress = ''}: Props) => (
+  <NoteItemWrapper onPress = { onPress }>
+    <Text>{title}</Text>
+  </NoteItemWrapper>
+)
 
 export default NoteItem;
